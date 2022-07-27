@@ -32,7 +32,7 @@ export const isAuthenticated = catchAsyncError(
   }
 );
 
-export const adminRole = (...roles: any) => {
+export const adminRole = (roles: string) => {
   return (req: IReqAuth, res: Response, next: NextFunction) => {
     if (!req.user) return;
     if (!roles.includes(req.user.role)) {

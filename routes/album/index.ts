@@ -1,7 +1,7 @@
 import { Router } from "express";
 import Joi from "joi";
 import { createValidator } from "express-joi-validation";
-import { isAuthenticated } from "../../middleware/auth";
+import { adminRole, isAuthenticated } from "../../middleware/auth";
 import {
   createAlbum,
   deleteAlbum,
@@ -26,9 +26,9 @@ router.post(
   isAuthenticated,
   createAlbum
 );
-router.get("/getAllAlbum", isAuthenticated, getAllAlbum);
-router.get("/getAlbum/:id", isAuthenticated, getAlbum);
-router.put("/update/:id", isAuthenticated, updateAlbum);
-router.delete("/delete/:id", isAuthenticated, deleteAlbum);
+router.get("/getAllAlbum", isAuthenticated, adminRole("admin"), getAllAlbum);
+router.get("/getAlbum/:id", isAuthenticated, adminRole("admin"), getAlbum);
+router.put("/update/:id", isAuthenticated, adminRole("admin"), updateAlbum);
+router.delete("/delete/:id", isAuthenticated, adminRole("admin"), deleteAlbum);
 
 export default router;

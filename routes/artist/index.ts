@@ -1,8 +1,14 @@
 import { Router } from "express";
 import Joi from "joi";
 import { createValidator } from "express-joi-validation";
-import { isAuthenticated } from "../../middleware/auth";
-import { createNewArtists, getArtist, getAllArtist, deleteArtist, updateArtist } from "../../controllers/artits";
+import { adminRole, isAuthenticated } from "../../middleware/auth";
+import {
+  createNewArtists,
+  getArtist,
+  getAllArtist,
+  deleteArtist,
+  updateArtist,
+} from "../../controllers/artits";
 
 const router = Router();
 const validator = createValidator({});
@@ -16,9 +22,25 @@ const artistSchema = Joi.object({
 });
 
 // When user try to register fire this function
-router.post("/create", validator.body(artistSchema), isAuthenticated, createNewArtists);
-router.get("/artist/:id", getArtist);
-router.get("/getAllArtist", getAllArtist);
-router.delete("/deleteArtist/:id", isAuthenticated, deleteArtist);
-router.put("/updateArtist/:id", isAuthenticated, updateArtist);
+router.post(
+  "/create",
+  validator.body(artistSchema),
+  isAuthenticated,
+  adminRole("admin"),
+  createNewArtists
+);
+router.get("/artist/:id", adminRole("admin"), getArtist);
+router.get("/getAllArtist", adminRole("admin"), getAllArtist);
+router.delete(
+  "/deleteArtist/:id",
+  isAuthenticated,
+  adminRole("admin"),
+  deleteArtist
+);
+router.put(
+  "/updateArtist/:id",
+  isAuthenticated,
+  adminRole("admin"),
+  updateArtist
+);
 export default router;
