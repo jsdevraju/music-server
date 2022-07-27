@@ -1,5 +1,5 @@
 import catchAsyncError from "../../middleware/catchAsyncError";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 import ErrorHandler from "../../utils/errorHandler";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -120,5 +120,17 @@ export const logout = catchAsyncError(
         token: null,
         user: null,
       });
+  }
+);
+
+export const getUser = catchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.find({ sort: { createdAt: 1 } });
+    if (user) {
+      res.status(200).json({
+        message: "User Successfully",
+        user,
+      });
+    }
   }
 );
