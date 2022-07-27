@@ -134,3 +134,16 @@ export const getUser = catchAsyncError(
     }
   }
 );
+
+export const updateUserRole = catchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const filter = { _id: req.params.id };
+    const role = { ...req.body };
+
+    const admin = await User.findOneAndUpdate(filter, { role }, { new: true });
+    res.status(200).json({
+      message: "User successfully promote",
+      admin,
+    });
+  }
+);
