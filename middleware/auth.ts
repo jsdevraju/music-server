@@ -31,3 +31,18 @@ export const isAuthenticated = catchAsyncError(
     next();
   }
 );
+
+export const adminRole = (...roles: any) => {
+  return (req: IReqAuth, res: Response, next: NextFunction) => {
+    if (!req.user) return;
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorHandler(
+          `Role: ${req.user.role} is not allow to this resource`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};

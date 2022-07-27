@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, login, google, logout, getUser } from "../../controllers/auth";
+import { register, login, google, logout, getUser, updateUserRole } from "../../controllers/auth";
 import Joi from 'joi';
 import { createValidator } from 'express-joi-validation'
 import { isAuthenticated } from "../../middleware/auth";
@@ -29,5 +29,6 @@ router.post("/google", google);
 // When user try to logout fire this function
 router.get("/logout", isAuthenticated, logout);
 router.get("/getAllUser", isAuthenticated, getUser);
+router.get("/updateUserRole", isAuthenticated, updateUserRole);
 
 export default router;

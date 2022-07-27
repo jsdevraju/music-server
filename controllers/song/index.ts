@@ -17,11 +17,11 @@ export const createSong = catchAsyncError(
 
 export const getSong = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
-    const song = await Song.findOne({ _id: req.params.id });
+    const song = await Song.findOne({ _id: req.params.id }).populate("artist", "name imageUrl");
     if (!song) return next(new ErrorHandler("album not found", 404));
 
     res.status(201).json({
-      message: "album get successfully",
+      message: "Song get successfully",
       song,
     });
   }
@@ -29,7 +29,7 @@ export const getSong = catchAsyncError(
 
 export const getAllSong = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
-    const song = await Song.find({ sort: { createdAt: 1 } });
+    const song = await Song.find({ sort: { createdAt: 1 } }).populate("artist", "name imageUrl");
 
     res.status(201).json({
       message: "album get successfully",
