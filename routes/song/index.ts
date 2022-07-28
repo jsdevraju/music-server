@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthenticated } from "../../middleware/auth";
+import { adminRole, isAuthenticated } from "../../middleware/auth";
 import {
   createSong,
   deleteSong,
@@ -11,10 +11,10 @@ import {
 const router = Router();
 
 // When user try to register fire this function
-router.post("/create", isAuthenticated, createSong);
+router.post("/create", isAuthenticated, adminRole("admin"), createSong);
 router.get("/song/:id", isAuthenticated, getSong);
 router.get("/getAllSong", isAuthenticated, getAllSong);
-router.delete("/delete/:id", isAuthenticated, deleteSong);
-router.put("/update/:id", isAuthenticated, updateSong);
+router.delete("/delete/:id", isAuthenticated, adminRole("admin"), deleteSong);
+router.put("/update/:id", isAuthenticated, adminRole("admin"), updateSong);
 
 export default router;

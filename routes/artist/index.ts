@@ -29,8 +29,8 @@ router.post(
   adminRole("admin"),
   createNewArtists
 );
-router.get("/artist/:id", adminRole("admin"), getArtist);
-router.get("/getAllArtist", adminRole("admin"), getAllArtist);
+router.get("/artist/:id", getArtist);
+router.get("/getAllArtist", getAllArtist);
 router.delete(
   "/deleteArtist/:id",
   isAuthenticated,

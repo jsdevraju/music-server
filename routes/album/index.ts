@@ -24,10 +24,11 @@ router.post(
   "/create-album",
   validator.body(albumSchema),
   isAuthenticated,
+  adminRole("admin"),
   createAlbum
 );
-router.get("/getAllAlbum", isAuthenticated, adminRole("admin"), getAllAlbum);
-router.get("/getAlbum/:id", isAuthenticated, adminRole("admin"), getAlbum);
+router.get("/getAllAlbum", isAuthenticated, getAllAlbum);
+router.get("/getAlbum/:id", isAuthenticated, getAlbum);
 router.put("/update/:id", isAuthenticated, adminRole("admin"), updateAlbum);
 router.delete("/delete/:id", isAuthenticated, adminRole("admin"), deleteAlbum);
 
