@@ -29,6 +29,6 @@ router.post("/google", google);
 // When user try to logout fire this function
 router.get("/logout", isAuthenticated, logout);
 router.get("/getAllUser", isAuthenticated, getUser);
-router.get("/updateUserRole", isAuthenticated, updateUserRole);
+router.put("/updateUserRole", isAuthenticated, updateUserRole);
 
 export default router;
