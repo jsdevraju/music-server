@@ -140,7 +140,7 @@ export const updateUserRole = catchAsyncError(
     if (!req.user?._id) return;
     if (req.user.role === "admin") {
       const filter = { _id: req.params.id };
-      const role = req.body.role;
+      const { role } = req.body;
       const admin = await User.findOneAndUpdate(
         filter,
         { role },
