@@ -4,7 +4,7 @@ import ErrorHandler from "../../utils/errorHandler";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../models/user";
-import { IUser } from "../../utils/interface";
+import { IReqAuth, IUser } from "../../utils/interface";
 
 // When User try to register our app fire this function
 export const register = catchAsyncError(
@@ -136,14 +136,20 @@ export const getUser = catchAsyncError(
 );
 
 export const updateUserRole = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const filter = { _id: req.params.id };
-    const role = { ...req.body };
-
-    const admin = await User.findOneAndUpdate(filter, { role }, { new: true });
-    res.status(200).json({
-      message: "User successfully promote",
-      admin,
-    });
+  async (req: IReqAuth, res: Response, next: NextFunction) => {
+    if (!req.user?._id) return;
+    if (req.user.role === "admin") {
+      const filter = { _id: req.params.id };
+      const role = req.body.role;
+      const admin = await User.findOneAndUpdate(
+        filter,
+        { role },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "User successfully promote",
+        admin,
+      });
+    }
   }
 );

@@ -9,7 +9,7 @@ import {
 } from "../../controllers/auth";
 import Joi from "joi";
 import { createValidator } from "express-joi-validation";
-import { adminRole, isAuthenticated } from "../../middleware/auth";
+import {  isAuthenticated } from "../../middleware/auth";
 
 const router = Router();
 const validator = createValidator({});
@@ -38,6 +38,6 @@ router.get("/logout", isAuthenticated, logout);
 
 router.get("/getAllUser", isAuthenticated, getUser);
 
-router.put("/updateUserRole/:id", isAuthenticated, adminRole("admin"),updateUserRole);
+router.put(`/promoteRole/:id`, isAuthenticated, updateUserRole);
 
 export default router;
