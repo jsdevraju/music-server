@@ -22,6 +22,6 @@ export const getUser = catchAsyncError(
     if (!getUser) next(new ErrorHandler("Not Found User", 404));
     const { password, ...otherInfo } = getUser?._doc as IUser;
 
-    res.status(404).json({ message: "User found", user: otherInfo });
+    res.status(200).json({ message: "User found", user: otherInfo });
   }
 );
