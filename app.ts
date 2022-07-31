@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://youtube-client-alpha.vercel.app",
+      "music-client-nwn5kswdi-jsdevraju.vercel.app",
     ],
   })
 );
