@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "music-client-nwn5kswdi-jsdevraju.vercel.app",
+      "https://music-client-pi.vercel.app",
     ],
   })
 );
