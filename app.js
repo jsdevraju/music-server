@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 // test route
 app.get("/", (req, res) => {
-  res.json({ message : "Api Working....."})
+  res.json({ message : "Api Working.....Great to working man"})
 });
 
 // Routes
