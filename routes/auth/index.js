@@ -6,10 +6,10 @@ import {
   logout,
   getUser,
   updateUserRole,
-} from "../../controllers/auth";
+} from "../../controllers/auth/index.js";
 import Joi from "joi";
 import { createValidator } from "express-joi-validation";
-import {  adminRole, isAuthenticated } from "../../middleware/auth";
+import {  adminRole, isAuthenticated } from "../../middleware/auth.js";
 
 const router = Router();
 const validator = createValidator({});

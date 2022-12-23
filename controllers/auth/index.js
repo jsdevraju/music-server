@@ -1,9 +1,8 @@
-import catchAsyncError from "../../middleware/catchAsyncError";
-import ErrorHandler from "../../utils/errorHandler";
+import catchAsyncError from "../../middleware/catchAsyncError.js";
+import ErrorHandler from "../../utils/errorHandler.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../../models/user";
-import { IReqAuth, IUser } from "../../utils/interface";
+import User from "../../models/user/index.js";
 
 // When User try to register our app fire this function
 export const register = catchAsyncError(

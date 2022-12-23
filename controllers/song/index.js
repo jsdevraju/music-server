@@ -1,6 +1,6 @@
-import catchAsyncError from "../../middleware/catchAsyncError";
-import ErrorHandler from "../../utils/errorHandler";
-import Song from "../../models/song";
+import catchAsyncError from "../../middleware/catchAsyncError.js";
+import ErrorHandler from "../../utils/errorHandler.js";
+import Song from "../../models/song/index.js";
 
 export const createSong = catchAsyncError(
   async (req, res, next) => {

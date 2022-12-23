@@ -1,6 +1,6 @@
-import catchAsyncError from "../../middleware/catchAsyncError";
-import ErrorHandler from "../../utils/errorHandler";
-import User from "../../models/user";
+import catchAsyncError from "../../middleware/catchAsyncError.js";
+import ErrorHandler from "../../utils/errorHandler.js";
+import User from "../../models/user/index.js";
 
 export const getAllUser = catchAsyncError(
   async (req, res, next) => {

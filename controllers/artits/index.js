@@ -1,6 +1,6 @@
-import catchAsyncError from "../../middleware/catchAsyncError";
-import ErrorHandler from "../../utils/errorHandler";
-import Artist from "../../models/artits";
+import catchAsyncError from "../../middleware/catchAsyncError.js";
+import ErrorHandler from "../../utils/errorHandler.js";
+import Artist from "../../models/artits/index.js";
 
 export const createNewArtists = catchAsyncError(
   async (req, res, next) => {

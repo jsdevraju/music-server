@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { config } from "dotenv";
-import errorHandler from "./middleware/error";
+import errorHandler from "./middleware/error.js";
 
 // Environment Variable Configuration
 config();
@@ -31,11 +31,11 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-import auth from './routes/auth'
-import artist from './routes/artist'
-import album from './routes/album'
-import song from "./routes/song";
-import user from "./routes/user";
+import auth from './routes/auth/index.js'
+import artist from './routes/artist/index.js'
+import album from './routes/album/index.js'
+import song from "./routes/song/index.js";
+import user from "./routes/user/index.js";
 
 // Routes Middleware
 app.use("/api/v1/auth", auth)

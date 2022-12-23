@@ -1,6 +1,6 @@
-import catchAsyncError from "../../middleware/catchAsyncError";
-import ErrorHandler from "../../utils/errorHandler";
-import Album from "../../models/album";
+import catchAsyncError from "../../middleware/catchAsyncError.js";
+import ErrorHandler from "../../utils/errorHandler.js";
+import Album from "../../models/album/index.js";
 
 export const createAlbum = catchAsyncError(async (req, res, next) => {
   const newAlbum = new Album({ ...req.body });

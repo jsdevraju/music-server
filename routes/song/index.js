@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { adminRole, isAuthenticated } from "../../middleware/auth";
+import { adminRole, isAuthenticated } from "../../middleware/auth.js";
 import {
   createSong,
   deleteSong,
   getAllSong,
   getSong,
   updateSong,
-} from "../../controllers/song";
+} from "../../controllers/song/index.js";
 
 const router = Router();
 

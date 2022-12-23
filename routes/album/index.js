@@ -1,14 +1,14 @@
 import { Router } from "express";
 import Joi from "joi";
 import { createValidator } from "express-joi-validation";
-import { adminRole, isAuthenticated } from "../../middleware/auth";
+import { adminRole, isAuthenticated } from "../../middleware/auth.js";
 import {
   createAlbum,
   deleteAlbum,
   getAlbum,
   getAllAlbum,
   updateAlbum,
-} from "../../controllers/album";
+} from "../../controllers/album/index.js";
 
 const router = Router();
 const validator = createValidator({});
