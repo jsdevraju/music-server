@@ -1,12 +1,10 @@
 import catchAsyncError from "./catchAsyncError";
 import ErrorHandler from "../utils/errorHandler";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from "../models/user";
-import { Response, NextFunction } from "express";
-import { IReqAuth } from "../utils/interface";
 
 export const isAuthenticated = catchAsyncError(
-  async (req: IReqAuth, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const token =
       req.headers.authorization?.split("Bearer ")[1] || req.cookies.token;
 
@@ -18,7 +16,7 @@ export const isAuthenticated = catchAsyncError(
     const decoded = jwt.verify(
       token,
       `${process.env.JWT_SECRET}`
-    ) as JwtPayload;
+    );
 
     const user = await User.findById(decoded.id);
     if (!user)
@@ -32,8 +30,8 @@ export const isAuthenticated = catchAsyncError(
   }
 );
 
-export const adminRole = (roles: string) => {
-  return (req: IReqAuth, res: Response, next: NextFunction) => {
+export const adminRole = (roles) => {
+  return (req, res, next) => {
     if (!req.user) return;
     if (!roles.includes(req.user.role)) {
       return next(

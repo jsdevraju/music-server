@@ -26,8 +26,8 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 // test route
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello Api Working");
+app.get("/", (req, res) => {
+  res.json({ message : "Api Working....."})
 });
 
 // Routes

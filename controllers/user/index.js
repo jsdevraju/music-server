@@ -1,11 +1,9 @@
 import catchAsyncError from "../../middleware/catchAsyncError";
-import { Request, Response, NextFunction } from "express";
 import ErrorHandler from "../../utils/errorHandler";
 import User from "../../models/user";
-import { IReqAuth, IUser } from "../../utils/interface";
 
 export const getAllUser = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const user = await User.find({});
 
     res.status(201).json({
@@ -16,11 +14,11 @@ export const getAllUser = catchAsyncError(
 );
 
 export const getUser = catchAsyncError(
-  async (req: IReqAuth, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     if (!req.user) return;
     const getUser = await User.findById(req.user._id);
     if (!getUser) next(new ErrorHandler("Not Found User", 404));
-    const { password, ...otherInfo } = getUser?._doc as IUser;
+    const { password, ...otherInfo } = getUser?._doc
 
     res.status(200).json({ message: "User found", user: otherInfo });
   }

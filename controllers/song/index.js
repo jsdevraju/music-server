@@ -1,10 +1,9 @@
 import catchAsyncError from "../../middleware/catchAsyncError";
-import { Request, Response, NextFunction } from "express";
 import ErrorHandler from "../../utils/errorHandler";
 import Song from "../../models/song";
 
 export const createSong = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const newSong = new Song({ ...req.body });
 
     await newSong.save();
@@ -16,7 +15,7 @@ export const createSong = catchAsyncError(
 );
 
 export const getSong = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const song = await Song.findOne({ _id: req.params.id }).populate("artist", "name imageUrl");
     if (!song) return next(new ErrorHandler("album not found", 404));
 
@@ -28,7 +27,7 @@ export const getSong = catchAsyncError(
 );
 
 export const getAllSong = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const song = await Song.find({ sort: { createdAt: 1 } }).populate("artist", "name imageUrl");
 
     res.status(201).json({
@@ -39,7 +38,7 @@ export const getAllSong = catchAsyncError(
 );
 
 export const deleteSong = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     const song = await Song.findByIdAndDelete({ _id: req.params.id });
     if (!song) return next(new ErrorHandler("Artist not found", 404));
 
@@ -50,7 +49,7 @@ export const deleteSong = catchAsyncError(
 );
 
 export const updateSong= catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req, res, next) => {
     // if user id match then update the user
     const update = await Song.findByIdAndUpdate(
       req.params.id,
